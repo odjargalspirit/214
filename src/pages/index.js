@@ -5,13 +5,13 @@ import { Analytics } from '@vercel/analytics/react';
 import useTripleClick from './useTripleClick'; // Import the custom hook
 
 const ValentinePage = () => {
-  const [yesButtonSize, setYesButtonSize] = useState(1);
+  const [ТиймButtonSize, setТиймButtonSize] = useState(1);
   const [persuadeText, setPersuadeText] = useState('');
   const [persuadeCount, setPersuadeCount] = useState(0);
-  const [showNoButton, setShowNoButton] = useState(true);
+  const [showҮгүйButton, setShowҮгүйButton] = useState(true);
   const [showThanks, setShowThanks] = useState(false);
   const [showInputPage, setShowInputPage] = useState(false); // State for the new input page
-  const [showCongrats, setShowCongrats] = useState(false); // State for the congratulations message
+  const [showEE, setShowEE] = useState(false); // State for the Easter egg
   const [showLeftConfetti, setShowLeftConfetti] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ValentinePage = () => {
   }, [showThanks]);
 
   const persuadeTexts = [
-    'Чи итгэлтэй байна уу?',
+   'Чи итгэлтэй байна уу? ',
     'Чи харамсаж магадгүй шүү!',
     'Үнэнээсээ юу? Дахиад боддоо!',
     'Алив л дээ битгий ичээ ! Боломж олго л доо!',
@@ -39,17 +39,17 @@ const ValentinePage = () => {
   ];
 
   const handleClick = (answer) => {
-    if (answer === 'Yes') {
-      setYesButtonSize((prevSize) => prevSize + 0.4);
+    if (answer === 'Үгүй') {
+      setТиймButtonSize((prevSize) => prevSize + 0.4);
       setPersuadeText(persuadeTexts[persuadeCount]);
       setPersuadeCount((prevCount) => prevCount + 1);
       if (persuadeCount === persuadeTexts.length) {
-        setShowNoButton(false);
+        setShowҮгүйButton(false);
       }
     } else {
-      setYesButtonSize(1); // Reset button size when the user clicks "Yes"
+      setТиймButtonSize(1); // Reset button size when the user clicks "Тийм"
       setPersuadeText('');
-      setShowNoButton(false);
+      setShowҮгүйButton(false);
       // Trigger the "Thanks" animation
       setTimeout(() => setShowThanks(true), 100);
     }
@@ -60,11 +60,11 @@ const ValentinePage = () => {
   };
 
   const handleTripleClick = useTripleClick(() => {
-    setShowCongrats(true); // Show the congratulations message
+    setShowEE(true); // Show the Easter egg message
   });
 
-  const handleCloseCongrats = () => {
-    setShowCongrats(false); // Close the congratulations message
+  const handleCloseEE = () => {
+    setShowEE(false); // Close the Easter egg message
   };
 
   return (
@@ -85,69 +85,67 @@ const ValentinePage = () => {
 
       <div style={{ marginTop: '20px' }}>
         <button
-          onClick={() => handleClick('Yes')}
+          onClick={() => handleClick('Тийм')}
           style={{
-            fontSize: `${yesButtonSize}em`,
+            fontSize: `${ТиймButtonSize}em`,
             backgroundColor: 'green',
             color: 'white',
             transition: 'font-size 0.5s',
             borderRadius: '10px',
           }}
         >
-          Yes
+          Тийм
         </button>
-        {showNoButton && (
+        {showҮгүйButton && (
           <button
-            onClick={() => handleClick('No')}
-            style={{ backgroundColor: 'red', color: 'white', borderRadius: '10px' }}
+            onClick={() => handleClick('Үгүй')}
+            style={{ backgroundColor: 'red', color: 'white', borderRadius: '10px', }}
           >
-            {persuadeText || 'No'}
+            {persuadeText || 'Үгүй'}
           </button>
         )}
       </div>
 
-      {showCongrats && (
+      {showThanks && (
         <div
           style={{
             position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            padding: '20px',
-            borderRadius: '10px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-            zIndex: '9999',
-            cursor: 'pointer'
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'lavender',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 0,
+            animation: 'fadeIn 2s forwards',
           }}
-          onClick={handleCloseCongrats}
         >
-          <p style={{ fontSize: '1.5em', color: 'black' }}>
-            Congrats! You found the Easter egg. 🐣
-          </p>
-          <p style={{ fontSize: '1.2em', color: 'black' }}>
-            Happy Valentine's Day!
-          </p>
-        </div>
-      )}
+          <Confetti
+            active={showLeftConfetti }
+            config={{
+              angle: 90,
+              spread: 360,
+              startVelocity: 45,
+              elementCount: 240, // Adjust element count as needed
+              decay: 0.7,
+            }}
+          />
+          <Confetti
+            active={showLeftConfetti}
+            config={{
+              angle: 180,
+              spread: 360,
+              startVelocity: 40,
+              elementCount: 140, // Adjust element count as needed
+              decay: 0.9,
+            }}
+          />
+          <h2 style={{ color: 'darkslategray', fontSize: '2em' }}>
+            Надтай болзоонд явах болсонд баярлалаа! Удахгүй уулзацгаая!
 
-      <div style={{ marginTop: 'auto', position: 'absolute', bottom: '0', width: '100%' }}>
-        <p style={{ color: 'grey', fontSize: '10px' }}>
-          Made with ❤️ by JRZ
-        </p>
-      </div>
-
-      <style jsx>{`
-        img {
-          margin-top: 10px;
-        }
-        button {
-          margin: 10px;
-          padding: 10px;
-        }
-      `}</style>
-    </div>
-  );
-};
-
-export default ValentinePage;
+</h2>
+          <button
+            onClick={handleNextPage}
