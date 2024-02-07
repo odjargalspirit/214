@@ -6,10 +6,10 @@ import useTripleClick from './useTripleClick'; // Import the custom hook
 
 
 const ValentinePage = () => {
-  const [yesButtonSize, setYesButtonSize] = useState(1);
+  const [ТиймButtonSize, setТиймButtonSize] = useState(1);
   const [persuadeText, setPersuadeText] = useState('');
   const [persuadeCount, setPersuadeCount] = useState(0);
-  const [showNoButton, setShowNoButton] = useState(true);
+  const [showҮгүйButton, setShowҮгүйButton] = useState(true);
   const [showThanks, setShowThanks] = useState(false);
   const [showInputPage, setShowInputPage] = useState(false); // State for the new input page
   const [showEE, setShowEE] = useState(false); // State for the Easter egg
@@ -23,33 +23,33 @@ const ValentinePage = () => {
   }, [showThanks]);
 
   const persuadeTexts = [
-    'Are you sure? ',
-    'You might regret it!',
-    'Really? Think again!',
-    'Come on, don\'t be shy! Give it a shot!',
-    'Imagine all the fun we could have!',
-    'I promise it will be worth it!',
-    'Don\'t let this opportunity slip away!',
-    'Just say yes! What do you have to lose?',
-    'You don\'t want to miss out on this, trust me!',
-    'I have made this especially for you!',
-    'Say yes and let the magic begin!',
-    'You\'re breaking my heart!',
-    'I would be sad. Say yes!',
-    'Last chance! Say yes and make my day!',
-    'You are leaving me no choice! Say yes!'
+   'Чи итгэлтэй байна уу? ',
+    'Чи харамсаж магадгүй шүү!',
+    'Үнэнээсээ юу? Дахиад боддоо!',
+    'Алив л дээ битгий ичээ ! Боломж олго л доо!',
+    'Би ямар их хөгжилтэй байхыг төсөөлдөө!',
+    'Би амлая үнэхээр гоё байх болноо!',
+    'Битгий боломжийг салхинд хийсгээрэй!',
+    'Зүгээр л тийм гэж хэл?',
+    'Чи үүнийг алгасахыг хүсэхгүй, Надад итгээрэй!',
+    'Би үүнийг зөвхөн чамд л хийсэн!',
+    'Тийм гэж хэлээд бүхнийг эхлүүлцгээе!',
+    'Чи миний зүрхийг зүсэж байна!',
+    'Би гунигт автлаа. Тийм гэж хэлээч!',
+    'Сүүлийн боломж! Тийм гэж хэлээд миний өдрийг авар!',
+    'Чи намайг сонголтгүй үлдээж байна! Тийм гэж хэл!'
   ];
 
   const handleClick = (answer) => {
-    if (answer === 'No') {
-      setYesButtonSize((prevSize) => prevSize + 0.4);
+    if (answer === 'Үгүй') {
+      setТиймButtonSize((prevSize) => prevSize + 0.4);
       setPersuadeText(persuadeTexts[persuadeCount]);
       setPersuadeCount((prevCount) => prevCount + 1);
       if (persuadeCount === persuadeTexts.length) {
-        setShowNoButton(false);
+        setShowҮгүйButton(false);
       }
     } else {
-      setYesButtonSize(1); // Reset button size when the user clicks "Yes"
+      setТиймButtonSize(1); // Reset button size when the user clicks "Тийм"
       setPersuadeText('');
       setShowNoButton(false);
       // Trigger the "Thanks" animation
@@ -73,8 +73,8 @@ const ValentinePage = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <Analytics />
       <h1 style={{ color: 'black', fontSize: '2em' }}>
-        Will you be my 
-        {/* valentine? */}
+        Чи миний Валентин
+        {/* Болох уу? */}
       </h1>
       <img
         src="/panda.gif"
@@ -98,7 +98,7 @@ const ValentinePage = () => {
         >
           Yes
         </button>
-        {showNoButton && (
+        {showҮгүйButton && (
           <button
             onClick={() => handleClick('No')}
             style={{ backgroundColor: 'red', color: 'white', borderRadius: '10px', }}
@@ -108,7 +108,7 @@ const ValentinePage = () => {
         )}
       </div>
 
-      {showThanks && (
+      {showБаярлалаа && (
         <div
           style={{
             position: 'fixed',
@@ -146,7 +146,7 @@ const ValentinePage = () => {
             }}
           />
           <h2 style={{ color: 'darkslategray', fontSize: '2em' }}>
-            Thanks for being my valentine! Will be seeing you soon! 🥰
+            Миний Валентин болсонд баярлалаа! Удахгүй уулзацгаая! 🥰
           </h2>
           <button
             onClick={handleNextPage}
@@ -195,7 +195,6 @@ const ValentinePage = () => {
 
       <div style={{ marginTop: 'auto', position: 'absolute', bottom: '0', width: '100%' }}>
         <p style={{ color: 'grey', fontSize: '10px' }}>
-          Need sponsorship to keep systems up and running <a href="https://github.com/sponsors/shivansh-13" style={{ color: 'grey', textDecoration: 'underline' }}> Github Sponsorship</a> Love 💜
         </p>
       </div>
 
