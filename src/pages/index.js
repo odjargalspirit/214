@@ -71,8 +71,7 @@ const ValentinePage = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <Analytics />
       <h1 style={{ color: 'black', fontSize: '2em' }}>
-        Чи миний Валентин
-        {/* Болох уу? */}
+        Чи надтай болзоонд явах уу?
       </h1>
       <img
         src="/panda.gif"
